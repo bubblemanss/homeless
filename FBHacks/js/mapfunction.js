@@ -29,11 +29,12 @@ function initialize() {
                     // });
                     addMarker(resp[i]);
                     if(i == 0) {
-                        $(".carousel-inner").append('<a onclick="toggleBounce('+i+'); map"><div class="item active">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</div></a>');
+                        $(".carousel-inner").append('<a onclick="toggleBounce('+i+');"><div class="item active">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</div></a>');
                     }
 
                     else {
-                        $(".carousel-inner").append('<a onclick="toggleBounce('+i+')"><div class="item">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</div></a>');
+                        $(".carousel-inner").append('<div class="item">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</div>');
+                        // $(".carousel-inner").append('<a onclick="toggleBounce('+i+')"><div class="item">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</div></a>');
                         // $(".carousel-inner").append('<div class="item">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</div>');
                     }
                 }

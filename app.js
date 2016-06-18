@@ -90,7 +90,7 @@ app.post('/sms', twilio.webhook({
         validate:false
     }), function(req, res) {
         console.log(req.body);
-        for(var = 0; i < shelters.length; i++){
+        for(var i = 0; i < shelters.length; i++){
             if(shelters[i].phone == req.body.From){
                 shelters[i].capacity = parseInt(req.body.Body);
             }

@@ -1,4 +1,5 @@
 var express = require("express");
+var request = require('request');            
 //var bodyParser = require("body-parser");
 var app = express();
 
@@ -49,5 +50,12 @@ app.post('/location', function(req, res){
         longitude: req.query.longitude
     }
 
-    res.status(200).send(data);
+    request('https://project-8953594553337096456.firebaseapp.com/seattle/shelters', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.status(200).send(body);
+        } 
+        else{
+            res.status(404).send(error);
+        }
+    })
 });

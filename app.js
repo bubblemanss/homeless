@@ -19,7 +19,7 @@ var server = app.listen(app.get("port"), function () {
 // app.set('view engine', 'jade');
 // app.use(express.methodOverride());
 // app.use(app.router);
-// app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 

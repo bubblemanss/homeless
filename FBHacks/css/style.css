@@ -1,0 +1,122 @@
+html {
+	height: 100%;
+	background-color: beige;
+}
+
+body {
+	background-color: beige;
+	height: 100%;
+}
+
+section {
+	height: 100%;
+}
+
+
+#map-container {
+	height: 100%;
+}
+
+#map-canvas {
+	height: 100%;
+}
+
+#carousel {
+	height: 100%;
+	padding: 0;
+}
+
+#myCarousel {
+	height: 100%;
+}
+
+.next {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+}
+
+/*#map-container {
+	height: 100%;
+}
+*/
+
+.carousel-inner {
+	height: 100%;
+	padding: 0;
+	overflow-y: auto;
+	/*display: none;*/
+}
+
+/*left {
+	left: 0;
+}
+
+.right {
+	right: 0;
+}*/
+
+.item {
+	text-align: center;
+	border: 2px solid white;
+	border-radius: 15px;
+	line-height: 2;
+	background-color: white;
+	margin: 10px;
+	/*margin-top: 50px;*/
+}
+
+.thumbnail {
+	width: 100px;
+	height: 100px;
+}
+
+.container {
+	padding: 0;
+	width: 100%;
+}
+
+.carousel-inner > .item {
+	display: block;
+}
+
+.carousel-control {
+		display: none;
+		background-image: none;
+	}
+@media all and (max-width: 700px) {
+	 #map-canvas {
+        height: 100%;
+    }
+    #map-container {
+    	height: 100%;
+    }
+
+    #carousel {
+	height: 25%;
+	padding: 0;
+	position: fixed;
+	bottom: 1px;
+}
+	.carousel-control {
+		display: block;
+		background-image: none !important;
+	}
+
+    .carousel-inner > .item {
+    	display: none;
+    }
+
+    .carousel-inner > .active{
+    	display: block;
+	/*width: 100%;*/
+	/*height: 100%;*/
+    }
+
+    .item {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+}

@@ -1,6 +1,8 @@
 var map;
 var pos;
 var markers = [];
+var previous = [];
+var infoWins = [];
 
 function initialize() {
     var mapOptions = {
@@ -29,12 +31,12 @@ function initialize() {
                     // });
                     addMarker(resp[i]);
                     if(i == 0) {
-                        $(".carousel-inner").append('<div class="item active"><a onclick="toggleBounce('+i+');">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</a></div>');
+                        $(".carousel-inner").append('<div class="item active"><a onclick="toggleBounce('+i+'); showWindow('+i+')">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</a></div>');
                         // $(".carousel-inner").append('<div class="item active">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</div></a>');
                     }
 
                     else {
-                        $(".carousel-inner").append('<div class="item"><a onclick="toggleBounce('+i+');">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</a></div>');
+                        $(".carousel-inner").append('<div class="item"><a onclick="toggleBounce('+i+'); showWindow('+i+')">'+ (i+1)+'. '+resp[i].title+'<br>'+resp[i].address_street+'<br>'+resp[i].phone+'<br>'+ 'Capacity: '+resp[i].capacity+'</a></div>');
                     }
                 }
 
@@ -43,11 +45,11 @@ function initialize() {
             // markers[0].setIcon(highlightedIcon());
 
             pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            var marker = new google.maps.Marker({
-                position: pos,
-                map: map
-            });
-            markers.push(marker);
+            // var marker = new google.maps.Marker({
+            //     position: pos,
+            //     map: map
+            // });
+            // markers.push(marker);
 
             map.setCenter(pos);
         },function () {
@@ -68,6 +70,20 @@ function contentFormat(body){
     var people = "# of people: "+body.people+"<br/>";
 
     return type+building+room+code+people;
+}
+
+function showWindow(index) {
+    // markers[index].click();
+    console.log(index);
+
+    // GEvent.trigger(markers[1], 'click');
+    google.maps.event.trigger(markers[index], 'click');
+
+    if(previous.length != 0) {
+        previous[0].close();
+    }
+
+    previous[0] = infoWins[index];
 }
 
  function toggleBounce (ind) {
@@ -103,6 +119,8 @@ function addMarker(data) {
         // position: location,
         // content: contentFormat(temp)
     });
+
+    infoWins.push(infowindow);
 
      marker.addListener('click', function() {
     infowindow.open(map, marker);

@@ -85,6 +85,6 @@ app.post('/food', function(req, res){
 app.post('/sms', twilio.webhook({
         validate:false
     }), function(req, res) {
-        console.log(req.body);
+        console.log(req);
         //var smsBody = req.body.Body.split(/\r\n|\r|\n/g);
 });

@@ -1,5 +1,6 @@
 var express = require("express");
-var request = require('request');            
+var request = require('request');    
+var twilio = require("twilio");        
 //var bodyParser = require("body-parser");
 var app = express();
 
@@ -23,6 +24,20 @@ var server = app.listen(app.get("port"), function () {
 // app.use(bodyParser.urlencoded());
 
 // Routes
+
+var shelters = [];
+request('https://project-8953594553337096456.firebaseapp.com/seattle/shelters', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        shelters = body;
+    } 
+});
+var food = [];
+request('https://project-8953594553337096456.firebaseapp.com/seattle/food_banks', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        food = body;
+    } 
+});
+
 
 app.get('/homes', function(req, res){
     res.set({
@@ -50,14 +65,7 @@ app.post('/location', function(req, res){
         longitude: req.query.longitude
     }
 
-    request('https://project-8953594553337096456.firebaseapp.com/seattle/shelters', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.status(200).send(body);
-        } 
-        else{
-            res.status(404).send(error);
-        }
-    })
+    res.status(200).send(shelters);
 });
 
 app.post('/food', function(req, res){
@@ -71,12 +79,13 @@ app.post('/food', function(req, res){
         longitude: req.query.longitude
     }
 
-    request('https://project-8953594553337096456.firebaseapp.com/seattle/food_banks', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.status(200).send(body);
-        } 
-        else{
-            res.status(404).send(error);
-        }
-    })
+    res.status(200).send(food);
+});
+
+app.post('/sms', twilio.webhook({
+        validate:false
+    }), function(req, res) {
+        console.log(req.body.Body);
+        var smsBody = req.body.Body.split(/\r\n|\r|\n/g);
+        crimeplusplus(smsBody[0], smsBody[1]);
 });

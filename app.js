@@ -44,5 +44,10 @@ app.post('/location', function(req, res){
         "Access-Control-Allow-Origin": "*"
     });
 
-    res.status(200).send("here");
+    var data = {
+        latitude: req.query.latitude,
+        longitude: req.query.longitude
+    }
+
+    res.status(200).send(data);
 });

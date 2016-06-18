@@ -100,7 +100,7 @@ function showWindow(index) {
 
 
 function addMarker(data) {
-    $.get("http://maps.google.com/maps/api/geocode/json?address=" + data.address_street + ', ' + data.address_city, function(res) {
+    $.get("https://maps.google.com/maps/api/geocode/json?address=" + data.address_street + ', ' + data.address_city, function(res) {
         var temp = res.results[0].geometry.location;
         var location = new google.maps.LatLng(temp.lat, temp.lng);
 
@@ -177,76 +177,6 @@ function showMarkers() {
 function deleteMarkers() {
     clearMarkers();
     markers = [];
-}
-
-function serverLookup(event){
-    //var url = "http://localhost:8080/lookup";
-    var url = "http://uwstudygroup.herokuapp.com/lookup";
-
-    event.preventDefault();
-    var code = document.getElementById("code").value;
-
-    var formData = {};
-    formData.code = code;
-
-    jQuery.ajax({
-        type:"POST",
-        url:url,
-        data:JSON.stringify(formData),
-        dataType:"json",
-        contentType: "application/json"
-    }).done(
-        function(data){
-            console.log(data);
-            clearMarkers();
-            for(var i = 0; i < data.length; i++){
-                addMarker(data[i]);
-            }
-        }
-    ).fail(
-        function(data){
-            console.log('err');
-            console.log(JSON.stringify(data));
-            console.log(data.status);
-            console.log(data.statusMessage);
-        }
-    );
-}
-
-function serverCreate(event){
-    //var url = "http://localhost:8080/create";
-    var url = "http://uwstudygroup.herokuapp.com/create";
-
-    event.preventDefault();
-    var code = document.getElementById("code").value;
-    var building = document.getElementById("building").value;
-    var room = document.getElementById("room").value;
-    var people = document.getElementById("people").value;
-
-    var formData = {};
-    formData.code = code;
-    formData.building = building;
-    formData.room = room;
-    formData.people = people;
-
-    jQuery.ajax({
-        type:"POST",
-        url:url,
-        data:JSON.stringify(formData),
-        dataType:"json",
-        contentType: "application/json"
-    }).done(
-        function(data){
-            console.log(data);
-        }
-    ).fail(
-        function(data){
-            console.log('err');
-            console.log(JSON.stringify(data));
-            console.log(data.status);
-            console.log(data.statusMessage);
-        }
-    );
 }
 
 function handleNoGeolocation(errorFlag) {

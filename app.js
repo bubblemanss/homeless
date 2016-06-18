@@ -96,5 +96,4 @@ app.post('/sms', twilio.webhook({
                 shelters[i].capacity = parseInt(req.body.Body);
             }
         }
-        console.log(shelters);
 });

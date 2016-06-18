@@ -28,11 +28,8 @@ app.use(bodyParser.urlencoded());
 var shelters = [];
 request('https://project-8953594553337096456.firebaseapp.com/seattle/shelters', function (error, response, body) {
     if (!error && response.statusCode == 200) {
+        body[0].phone = "206-555-5555";
         shelters = body;
-        body[0].phone = "+18579308574";
-        for(var i = 1; i < body.length; i++){
-            body[i].phone = "";
-        }
     } 
 });
 var food = [];
@@ -91,7 +88,7 @@ app.post('/sms', twilio.webhook({
     }), function(req, res) {
         console.log(req.body);
         for(var i = 0; i < shelters.length; i++){
-            if(shelters[i].phone == req.body.From){
+            if(shelters[i].phone == "206-555-5555"){
                 shelters[i].capacity = parseInt(req.body.Body);
             }
         }

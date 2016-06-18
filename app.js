@@ -59,3 +59,24 @@ app.post('/location', function(req, res){
         }
     })
 });
+
+app.post('/food', function(req, res){
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+    });
+
+    var data = {
+        latitude: req.query.latitude,
+        longitude: req.query.longitude
+    }
+
+    request('https://project-8953594553337096456.firebaseapp.com/seattle/food_banks', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.status(200).send(body);
+        } 
+        else{
+            res.status(404).send(error);
+        }
+    })
+});

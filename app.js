@@ -28,8 +28,12 @@ app.use(bodyParser.urlencoded());
 var shelters = [];
 request('https://project-8953594553337096456.firebaseapp.com/seattle/shelters', function (error, response, body) {
     if (!error && response.statusCode == 200) {
-        body[0].phone = "206-555-5555";
-        shelters = body;
+        shelters = JSON.parse(body);
+        shelters[0].phone = "206-555-5555"; 
+
+        for(var i = 0; i < shelters.length; i++){
+            //console.log(shelters[i]);
+        }
     } 
 });
 var food = [];

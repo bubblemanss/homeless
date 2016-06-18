@@ -1,7 +1,7 @@
 var express = require("express");
 var request = require('request');    
 var twilio = require("twilio");        
-//var bodyParser = require("body-parser");
+var bodyParser = require("body-parser");
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -20,8 +20,8 @@ var server = app.listen(app.get("port"), function () {
 // app.use(express.methodOverride());
 // app.use(app.router);
 // app.use(express.static(__dirname + '/public'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 // Routes
 
